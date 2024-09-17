@@ -1,4 +1,4 @@
-function logErrors (err, req, res, next) {
+function logErrors(err, req, res, next) {
   console.error(err);
   next(err);
 }
@@ -19,5 +19,4 @@ function boomErrorHandler(err, req, res, next) {
   }
 }
 
-
-module.exports = { logErrors, errorHandler, boomErrorHandler }
+export { logErrors, errorHandler, boomErrorHandler };
