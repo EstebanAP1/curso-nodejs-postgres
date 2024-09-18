@@ -7,9 +7,14 @@ import {
   errorHandler,
   boomErrorHandler,
 } from './middlewares/error.handler.js';
+import { checkApi } from './middlewares/auth.handler.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const PORT = process.env.PORT || 3000;
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 app.use(json());
 
@@ -23,10 +28,16 @@ const options = {
     }
   },
 };
+
 app.use(cors(options));
+import './utils/auth/index.js';
 
 app.get('/', (req, res) => {
-  res.send('Hola mi server en express');
+  res.send('Hi');
+});
+
+app.get('/protected', checkApi, (req, res) => {
+  res.send('Welcome');
 });
 
 routerApi(app);
